@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Touch Event Example</title>
+		<script src="js/phaser.min.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', {create: create,render: render});
+			var win=window.innerWidth;
+			var wih=window.innerHeight;	
+			var dpr=window.devicePixelRatio;
+			
+			var game = new Phaser.Game(wih * dpr, wih * dpr, Phaser.CANVAS, 'mobilegameArea',{create: create,render:render});
+			var red=255;
+			var green=0;
+			var blue=0;	
+			var cursors;
+
+			function create()
+			{
+				game.physics.startSystem(Phaser.Physics.ARCADE);
+				cursors = game.input.keyboard.createCursorKeys();
+	
+			}
+			function render()
+			{
+				game.context.fillStyle = "rgb("+red+","+green+","+blue+")";
+			    	game.context.beginPath();
+				game.context.linewidth=10;
+    				game.context.fillRect(10,10,game.width-20,game.height-20);
+    				game.context.closePath();
+				game.input.onTap.add(onTap,this);
+			}
+
+			function onTap(pointer,doubleTap)
+			{
+				if(doubleTap)
+				{
+					if(red==255)
+					{
+						red=0;
+						green=255;
+					}
+					else if(green==255)
+					{
+						green=0;
+						blue=255;
+					}
+					else if(blue=255)
+					{
+						blue=0;
+						red=255; 
+					}
+				}	
+			}
+		</script>
+	</body>
+</html>
