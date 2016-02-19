@@ -1,50 +1,52 @@
 <html>
 	<head>
 		<title>Touch Event Example</title>
-		<script src="js/phaser.min.js"></script>
+		<script src="phaser.min.js"></script>
 	</head>
 	<body>
 		<script type="text/javascript">
 			//var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', {create: create,render: render});
-			var win=window.innerWidth;
-			var wih=window.innerHeight;	
-			//var dpr=window.devicePixelRatio;
-			
-			var game = new Phaser.Game(win, wih, Phaser.CANVAS, 'mobilegameArea',{create: create,render:render});
+			var wiw=window.innerWidth-20;
+			var wih=window.innerHeight-20;
+			var game = new Phaser.Game(wiw, wih, Phaser.CANVAS, 'mobilegameArea',{create: create,render:render});
 			
 			var red=255;
 			var green=0;
 			var blue=0;	
 			var cursors;
-
+			var gw;
+			var gh;
+			var scale=0;	
 			function create()
 			{
-				game.physics.startSystem(Phaser.Physics.ARCADE);
-				game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
-
-				game.scale.setResizeCallback(this.gameResized, this);
-
-
-				gameResized(manager: Phaser.ScaleManager, bounds: Phaser.Rectangle)
-				{
-    					var scale = Math.min(window.innerWidth / this.game.width, window.innerHeight / this.game.height);
- 
-					manager.setUserScale(scale, scale, 0, 0);
-				}
-				
-
+				game.physics.startSystem(Phaser.Physics.ARCADE);		
+				this.scale.ScaleMode=Phaser.ScaleManager.USER_SCALE;
+				this.scale.setResizeCallback(this.gameResized,this);
 				cursors = game.input.keyboard.createCursorKeys();
 			}
+			
+			function gameResized()
+			{
+    				scale = Math.min(window.innerWidth / this.game.width, window.innerHeight / this.game.height);
+ 				var manager=Phaser.ScaleManager;	
+				manager.setUserScale(scale, scale, 0, 0);
+			}
+
 			function render()
 			{
 				game.context.fillStyle = "rgb("+red+","+green+","+blue+")";
 			    	game.context.beginPath();
 				game.context.linewidth=10;
-    				game.context.fillRect(10,10,game.width-10,game.height-10);
+    				//game.context.fillRect(50,50,game.canvas.width-10,game.canvas.height-10);
+    				game.context.fillRect(50,50,wiw-110,wih-110);
     				game.context.closePath();
+				game.context.font="30pt Arial";
+				game.context.fillStyle="rgba(255,0,0,1)";
+				game.context.fillText("window:" + window.innerWidth + " X " + window.innerHeight,15,35);
+				game.context.fillText("game:"+game.width + " X " + game.height,400,35);	
 				game.input.onTap.add(onTap,this);
 			}
-
+			
 			function onTap(pointer,doubleTap)
 			{
 				if(doubleTap)
