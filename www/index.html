@@ -2,16 +2,17 @@
 	<head>
 		<title>Touch Event Example</title>
 		<script src="js/phaser.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/stylesheet1.css" />
 	</head>
 	<body>
 		<div id="div1">
-			<h1>hello</h1>
+			<h1 id="title">hello</h1>
 		</div>	
 		<script type="text/javascript">
-			//var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', {create: create,render: render});
+			
 			var wiw=window.innerWidth-20;
 			var wih=window.innerHeight-document.getElementById("div1").offsetHeight-60;
-			var game = new Phaser.Game(wiw, wih, Phaser.CANVAS, 'mobilegameArea',{create: create,render:render});
+			var game = new Phaser.Game(wiw, wih, Phaser.CANVAS, 'mobilegameArea',{create: create,render:render},true);
 			
 			var red=255;
 			var green=0;

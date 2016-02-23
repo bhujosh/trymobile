@@ -1,0 +1,14 @@
+body{
+  	background-image: url("../img/starrysky.png");
+	background-repeat: repeat;
+}
+
+#title
+{
+    color: orange;
+    text-align: center;
+    font-family: "Comic Sans MS";
+    font-size: 60px;
+    text-shadow: 2px 2px 3px white,
+		 4px 4px 5px green;
+}
